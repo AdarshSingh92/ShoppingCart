@@ -1,0 +1,77 @@
+
+<form #productForm="ngForm" (ngSubmit)="onSubmit()">
+        
+    <div class="container">
+        <h1>Add New Product</h1>
+        <div class="mb-3 row">
+            <label for="txttitle" class="col-sm-2 col-form-label">Title:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="txttitle" name="txttitle" [(ngModel)]="product.title">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="txtprice" class="col-sm-2 col-form-label">Price:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="txtprice" name="txtprice" [(ngModel)]="product.price">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="txtstock" class="col-sm-2 col-form-label">Stock:</label>
+            <div class="col-sm-3">
+            <input type="text" class="form-control" id="txtstock" name="txtstock" [(ngModel)]="product.stock">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="txtraiting" class="col-sm-2 col-form-label">Raiting:</label>
+            <div class="col-sm-3">
+            <input type="text" class="form-control" id="txtraiting" name="txtraiting" [(ngModel)]="product.rating">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="txtbrand" class="col-sm-2 col-form-label">Brand:</label>
+            <div class="col-sm-3">
+            <input type="text" class="form-control" id="txtbrand" name="txtbrand" [(ngModel)]="product.brand">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="txtcategory" class="col-sm-2 col-form-label">Category:</label>
+            <div class="col-sm-3">
+            <input type="text" class="form-control" id="txtcategory" name="txtcategory" [(ngModel)]="product.category">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="txtDescription" class="col-sm-2 col-form-label">Description:</label>
+            <div class="col-sm-3">
+            <input type="text" class="form-control" id="txtDescription" name="txtDescription" [(ngModel)]="product.description">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="txtthumbnail" class="col-sm-2 col-form-label">Thumbnail:</label>
+            <div class="col-sm-3">
+            <input type="text" class="form-control" id="txtthumbnail" name="txtthumbnail" [(ngModel)]="product.thumbnail">
+            </div>
+        </div>   
+        <div class="mb-3 row">
+            <div *ngFor="let textbox of textboxes;let i= index;">
+                <label for="txtimage{{i}}" id="lblImage{{i}}" class="col-sm-2 col-form-label">Image {{i+1}}:</label>
+                <div  class="col-sm-3">
+                    <input type="text" class="form-control" id="txtimage{{i}}" name="txtImage{{i}}" [(ngModel)]="product.images[i]" >                   
+                    <input  name="btnImage{{i}}" type="button" id="btnRemoveTextbox" class="btn btn-primary" text="Remove Image" 
+                    value="Remove Image" (click)="removeTextBox(i)">
+                </div>                         
+            </div>           
+        </div>
+        <div class="mb-3 row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-3">                
+                <input type="button" name="btnAddTextbox" id="btnAddTextbox" class="btn btn-primary" text="Add" value="Add Image" (click)="addTextBox()">   
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-sm-2"></div>
+            <div  class="col-sm-3">
+                <input type="submit" name="btnSubmit" class="btn btn-primary" value="Submit">
+            </div>
+        </div>
+    </div>
+<form>
