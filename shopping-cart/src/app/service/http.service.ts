@@ -10,5 +10,5 @@ export class HttpService {
 
   getData<T>(url:string):Observable<T>{
    return this.http.get<T>(url);
-  }
+  }  
 }
