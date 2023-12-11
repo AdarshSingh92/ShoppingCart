@@ -11,6 +11,7 @@
             <h5 class="card-title">{{product.title}}</h5>
             <p class="card-text">{{product.description}}</p>
             <a [routerLink]="['/productdetails',product.id]" class="btn btn-primary">More Details..</a>
+            <a style="margin-left: 80px;" [routerLink]="['/addproduct',product.id,'edit']" class="btn btn-primary">Edit Details</a>
           </div>
         </div>
       </div>      
