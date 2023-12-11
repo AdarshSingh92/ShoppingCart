@@ -65,6 +65,7 @@ onSubmit() {
   else if (this.panelMode ==='edit')
   {    
     this.productService.updateDetails(this.product);  
+    alert("Product "+this.product.title+" Updated successfully");
   }
 }
 
