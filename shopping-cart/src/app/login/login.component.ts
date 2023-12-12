@@ -16,7 +16,7 @@ export class LoginComponent {
   login(){
     this.authService.login(this.user.UserName,this.user.Password).subscribe(response =>{
       if(response){
-        localStorage.setItem('logintoken',response.token);     
+        sessionStorage.setItem('logintoken',response.token);     
         this.router.navigate(['/productlist']);
       }
     });
