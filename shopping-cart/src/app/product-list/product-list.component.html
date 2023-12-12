@@ -1,0 +1,16 @@
+<div class="container mt-4">
+    <div class="row">
+        
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of productList">
+        <div class="card">
+          <img [src]="product.thumbnail" class="card-img-top" height="220px" alt="Placeholder Image">
+          <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            <a href="#" class="btn btn-primary">More Details..</a>
+          </div>
+        </div>
+      </div>      
+
+    </div>
+  </div>
