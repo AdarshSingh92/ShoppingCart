@@ -14,13 +14,17 @@ export class ProductListComponent implements OnInit  {
     constructor(public productService:ProductService) { }
 ngOnInit(){
   debugger;
-    if(ProductService.productList == null || ProductService.productList.length == 0){
+  if(localStorage.getItem('productlist') != null){
+  this.productList = JSON.parse(localStorage.getItem('productlist')!);
+  }
+    if(this.productList == null || this.productList.length == 0){
     this.productService.getAllData().subscribe(response=>
     {    
       this.productList = response.products;  
-      ProductService.productList = response.products;
+      localStorage.setItem('productlist',JSON.stringify(this.productList));
+      //ProductService.productList = response.products;
     });
   }
-  this.productList = ProductService.productList;
+ 
   } 
 }

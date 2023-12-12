@@ -15,6 +15,7 @@ export class ProductService {
 
   setData(product:Product){
     ProductService.productList.push(product);
+    localStorage.setItem('productlist', JSON.stringify(ProductService.productList));
   }
   getAllData(): Observable<any> {     
     return this.httpService.getData<any>('https://dummyjson.com/products'); 
@@ -22,7 +23,11 @@ export class ProductService {
 
   getDetails(id:number | null):Product{
     debugger;
+    if(localStorage.getItem('productlist') != null){
+    ProductService.productList = JSON.parse(localStorage.getItem('productlist')!);  
+  }
     return ProductService.productList.filter(x=> x.id == id)[0];
+
   }
 
   updateDetails(product:Product){
@@ -30,6 +35,7 @@ export class ProductService {
       if(item.id === product.id){
         item = product;       
       }     
-    })   
+    })
+    localStorage.setItem('productlist',JSON.stringify(ProductService.productList));
   }
 }
