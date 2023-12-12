@@ -1,4 +1,7 @@
-<div class="container mt-4">
+
+
+<div class="container mt-4">  
+  <button class="btn btn-primary" [routerLink]="['/addproduct']" >Add New Product</button>
     <div class="row">
         
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of productList">
@@ -7,10 +10,11 @@
           <div class="card-body">
             <h5 class="card-title">{{product.title}}</h5>
             <p class="card-text">{{product.description}}</p>
-            <a href="#" class="btn btn-primary">More Details..</a>
+            <a [routerLink]="['/productdetails',product.id]" class="btn btn-primary">More Details..</a>
+            <a style="margin-left: 80px;" [routerLink]="['/addproduct',product.id,'edit']" class="btn btn-primary">Edit Details</a>
           </div>
         </div>
       </div>      
 
     </div>
-  </div>
+</div>

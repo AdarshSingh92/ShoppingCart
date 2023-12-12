@@ -11,4 +11,7 @@ export class HttpService {
   getData<T>(url:string):Observable<T>{
    return this.http.get<T>(url);
   }
+  postData<T>(url:string,body:T):Observable<T>{
+    return this.http.post<T>(url,body);
+  }
 }
