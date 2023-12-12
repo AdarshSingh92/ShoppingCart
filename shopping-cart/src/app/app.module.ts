@@ -9,13 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms'
+import { ProductService } from './service/product.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
     ProductDetailsComponent,
-    AddProductComponent
+    AddProductComponent    
   ],
   imports: [
     BrowserModule,
@@ -23,7 +24,7 @@ import { FormsModule } from '@angular/forms'
     HttpClientModule,
     FormsModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

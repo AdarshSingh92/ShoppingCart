@@ -52,7 +52,7 @@
             </div>
         </div>   
         <div class="mb-3 row">
-            <div *ngFor="let textbox of textboxes;let i= index;">
+            <div *ngFor="let img of product.images;let i= index;">
                 <label for="txtimage{{i}}" id="lblImage{{i}}" class="col-sm-2 col-form-label">Image {{i+1}}:</label>
                 <div  class="col-sm-3">
                     <input type="text" class="form-control" id="txtimage{{i}}" name="txtImage{{i}}" [(ngModel)]="product.images[i]" >                   
@@ -70,8 +70,11 @@
         <div class="mb-3 row">
             <div class="col-sm-2"></div>
             <div  class="col-sm-3">
-                <input type="submit" name="btnSubmit" class="btn btn-primary" value="Submit">
+                <input type="submit" *ngIf="panelMode ==='submit'" name="btnSubmit" class="btn btn-primary" value="Submit">
+                <input type="submit" *ngIf="panelMode ==='edit'" name="btnUpdate" class="btn btn-primary" value="Update">
             </div>
         </div>
     </div>
 <form>
+
+<input type="button" class="btn btn-primary" value="Product List" [routerLink]="['/productlist']">
