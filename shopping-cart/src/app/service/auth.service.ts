@@ -15,4 +15,7 @@ export class AuthService {
       debugger;     
       return this.httpService.postData(this.loginURL,{username:userName,password:password});
     }
+    isLoggedIn():boolean{
+      return !! sessionStorage.getItem('logintoken');
+    }
 }
