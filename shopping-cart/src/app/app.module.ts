@@ -11,6 +11,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms'
 import { ProductService } from './service/product.service';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './service/auth.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [HttpService, ProductService],
+  providers: [HttpService, ProductService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
