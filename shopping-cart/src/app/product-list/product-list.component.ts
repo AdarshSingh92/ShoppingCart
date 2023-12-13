@@ -1,16 +1,19 @@
 import { Component,OnInit  } from '@angular/core';
-import { HttpService } from '../service/http.service';
 import { Product } from '../interface/product';
 import { ProductService } from '../service/product.service';
 
+ 
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
+  
 })
-export class ProductListComponent implements OnInit  { 
+export class ProductListComponent implements OnInit  {
+
   productList:Product[] = [];
+  searchTerm:string = '';
     constructor(public productService:ProductService) { }
 ngOnInit(){
   debugger;
