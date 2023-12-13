@@ -1,10 +1,17 @@
 
 
 <div class="container mt-4">  
-  <button class="btn btn-primary" [routerLink]="['/addproduct']" >Add New Product</button>
+  <div class="row">
+    <div class="col-lg-6">
+      <button class="btn btn-primary" [routerLink]="['/addproduct']" >Add New Product</button>
+    </div>
+    <div class="col-lg-6">
+      <input type="text" [(ngModel)]="searchTerm"  placeholder="Search products" />
+    </div> 
+</div>
     <div class="row">
         
-      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of productList">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of productList | productfilter:searchTerm">
         <div class="card">
           <img [src]="product.thumbnail" class="card-img-top" height="220px" alt="Placeholder Image">
           <div class="card-body">

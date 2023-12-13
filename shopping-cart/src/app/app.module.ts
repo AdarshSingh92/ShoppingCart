@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms'
 import { ProductService } from './service/product.service';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './service/auth.service';
+import { ProductfilterPipe } from './pipes/productfilter.pipe';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { AuthService } from './service/auth.service';
     ProductListComponent,
     ProductDetailsComponent,
     AddProductComponent,
-    LoginComponent    
+    LoginComponent,
+    ProductfilterPipe
   ],
   imports: [
     BrowserModule,
