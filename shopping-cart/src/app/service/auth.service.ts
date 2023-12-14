@@ -11,8 +11,7 @@ export class AuthService {
   constructor(private httpService:HttpService) { }
     loginURL:string = 'https://dummyjson.com/auth/login';
 
-    login(userName:string,password:string):Observable<any>{
-      debugger;     
+    login(userName:string,password:string):Observable<any>{   
       return this.httpService.postData(this.loginURL,{username:userName,password:password});
     }
     isLoggedIn():boolean{

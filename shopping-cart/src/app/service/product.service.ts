@@ -13,7 +13,6 @@ export class ProductService {
     return JSON.parse(localStorage.getItem('productlist')!);
   }
   setData(product:Product){
-    debugger;  
     var productList = this.getDataFromLocalStorage();
     productList.push(product)
     localStorage.setItem('productlist', JSON.stringify(productList));
@@ -23,7 +22,6 @@ export class ProductService {
   }
 
   getDetails(id:number | null):Product{
-    debugger;
     var productList = this.getDataFromLocalStorage();  
     return productList.filter(x=> x.id == id)[0];
   }

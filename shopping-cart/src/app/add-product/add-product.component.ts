@@ -3,14 +3,14 @@ import { Product } from '../interface/product';
 import { HttpService } from '../service/http.service';
 import { ProductService } from '../service/product.service';
 import { ActivatedRoute } from '@angular/router';
-import { OnInit } from '@angular/core';
+import { OnInit,AfterViewInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent implements OnInit {
+export class AddProductComponent implements OnInit,AfterViewInit {
   product:Product; 
   productForm!:FormGroup;
   controlCount:number = 1;
@@ -19,6 +19,7 @@ export class AddProductComponent implements OnInit {
   productID:number | null = null;
   constructor(private http:HttpService,private route:ActivatedRoute,private productService:ProductService,
     private formBuilder:FormBuilder ) {
+      console.log('constructor calling');
    this.product = {
     price:null,
     brand :'',
@@ -32,7 +33,7 @@ export class AddProductComponent implements OnInit {
     title:'',
     discountPercentage:null
    }
-   this.fillFormControlls();
+   
   }
   
   fillFormControlls(){
@@ -50,26 +51,38 @@ export class AddProductComponent implements OnInit {
       thumbnail: new FormControl(this.product.thumbnail,[Validators.required,Validators.maxLength(250)])        
      });
      this.product.images.forEach((value, index)=>{
-      this.productForm.addControl('Image'+index+1, new FormControl(value,[Validators.required,Validators.maxLength(250)]));
+      this.productForm.addControl('image'+(index+1), new FormControl(value,[Validators.required,Validators.maxLength(250)]));
+      this.controlCount = this.controlCount + 1;
      });
     
   }
-ngOnInit(): void {
-  console.log(this.panelMode);
-  this.route.params.subscribe(params=> {
-    if(params['id'])
-    this.productID = params['id'];
-    if(params['panelmode'])
-    this.panelMode = params['panelmode']
-  });
 
-  if(this.panelMode === 'edit')
-  {
-    this.product = this.productService.getDetails(this.productID);
-    this.fillFormControlls()
-   
+  getPanelMode(){
+    this.route.params.subscribe(params=> {
+      if(params['id'])
+      this.productID = params['id'];
+      if(params['panelmode'])
+      this.panelMode = params['panelmode']
+    });
   }
-}
+
+  fillProductIfEditPanel(){
+    if(this.panelMode === 'edit')
+    {
+      this.product = this.productService.getDetails(this.productID);    
+    }
+  }
+
+  ngOnInit(): void {
+    console.log('ngOnInit calling');   
+    this.getPanelMode();
+    this.fillProductIfEditPanel();
+    this.fillFormControlls();
+  }
+
+  ngAfterViewInit(){
+    console.log('ngAfterViewInit calling');
+  }
 
 onSubmit() {
   if(this.productForm.valid){
