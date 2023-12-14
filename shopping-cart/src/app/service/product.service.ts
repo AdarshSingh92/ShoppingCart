@@ -7,35 +7,32 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-
-  static productList:Product[] = [];
-  constructor(private httpService:HttpService) { 
-   
+  constructor(private httpService:HttpService) {   
   }
-
+  getDataFromLocalStorage() :Product[] {
+    return JSON.parse(localStorage.getItem('productlist')!);
+  }
   setData(product:Product){
-    ProductService.productList.push(product);
-    localStorage.setItem('productlist', JSON.stringify(ProductService.productList));
+    var productList = this.getDataFromLocalStorage();
+    productList.push(product)
+    localStorage.setItem('productlist', JSON.stringify(productList));
   }
   getAllData(): Observable<any> {     
     return this.httpService.getData<any>('https://dummyjson.com/products'); 
   }
 
   getDetails(id:number | null):Product{
-    debugger;
-    if(localStorage.getItem('productlist') != null){
-    ProductService.productList = JSON.parse(localStorage.getItem('productlist')!);  
-  }
-    return ProductService.productList.filter(x=> x.id == id)[0];
-
+    var productList = this.getDataFromLocalStorage();  
+    return productList.filter(x=> x.id == id)[0];
   }
 
   updateDetails(product:Product){
-    ProductService.productList.forEach(item => {
+    var productlist = this.getDataFromLocalStorage();
+    productlist.forEach(item => {
       if(item.id === product.id){
         item = product;       
       }     
     })
-    localStorage.setItem('productlist',JSON.stringify(ProductService.productList));
+    localStorage.setItem('productlist',JSON.stringify(productlist));
   }
 }

@@ -7,7 +7,6 @@ import { Product } from '../interface/product';
 export class ProductfilterPipe implements PipeTransform {
 
   transform(items: Product[], searchTerm:string): Product[] {
-    debugger;
      return items.filter(x=> x.title.toLowerCase().includes(searchTerm.toLowerCase()) == true);  
   }
 

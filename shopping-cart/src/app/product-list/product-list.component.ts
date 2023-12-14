@@ -16,7 +16,6 @@ export class ProductListComponent implements OnInit  {
   searchTerm:string = '';
     constructor(public productService:ProductService) { }
 ngOnInit(){
-  debugger;
   if(localStorage.getItem('productlist') != null){
   this.productList = JSON.parse(localStorage.getItem('productlist')!);
   }
