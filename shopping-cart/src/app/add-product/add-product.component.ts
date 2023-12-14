@@ -12,7 +12,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AddProductComponent implements OnInit {
   product:Product; 
-  productForm:FormGroup;
+  productForm!:FormGroup;
   controlCount:number = 1;
   panelMode:string='submit'; //there will be two mode in panel add or
   //edit if value found than edit otherwise add - default is add
@@ -32,20 +32,27 @@ export class AddProductComponent implements OnInit {
     title:'',
     discountPercentage:null
    }
-   this.productForm = new FormGroup({
-    title: new FormControl('',[Validators.required,Validators.maxLength(250)]),
-    price: new FormControl('',[Validators.required,Validators.maxLength(10),
-    Validators.pattern('^[0-9,.]*$')]),
-    stock: new FormControl('',[Validators.required,Validators.maxLength(10),
-      Validators.pattern('^[0-9]*$')]),
-    rating:new FormControl('',[Validators.required,Validators.maxLength(10),
+   this.fillFormControlls();
+  }
+  
+  fillFormControlls(){
+    this.productForm = new FormGroup({
+      title: new FormControl(this.product.title,[Validators.required,Validators.maxLength(250)]),
+      price: new FormControl(this.product.price,[Validators.required,Validators.maxLength(10),
       Validators.pattern('^[0-9,.]*$')]),
-    brand: new FormControl('',[Validators.required,Validators.maxLength(250)]),
-    category: new FormControl('',[Validators.required,Validators.maxLength(250)]),
-    description: new FormControl('',[Validators.required,Validators.maxLength(250)]),
-    thumbnail: new FormControl('',[Validators.required,Validators.maxLength(250)]),   
-    //image:new FormControl('',[Validators.required,Validators.maxLength(250)])
-   });
+      stock: new FormControl(this.product.stock,[Validators.required,Validators.maxLength(10),
+        Validators.pattern('^[0-9]*$')]),
+      rating:new FormControl(this.product.rating,[Validators.required,Validators.maxLength(10),
+        Validators.pattern('^[0-9,.]*$')]),
+      brand: new FormControl(this.product.brand,[Validators.required,Validators.maxLength(250)]),
+      category: new FormControl(this.product.category,[Validators.required,Validators.maxLength(250)]),
+      description: new FormControl(this.product.description,[Validators.required,Validators.maxLength(250)]),
+      thumbnail: new FormControl(this.product.thumbnail,[Validators.required,Validators.maxLength(250)])        
+     });
+     this.product.images.forEach((value, index)=>{
+      this.productForm.addControl('Image'+index+1, new FormControl(value,[Validators.required,Validators.maxLength(250)]));
+     });
+    
   }
 ngOnInit(): void {
   console.log(this.panelMode);
@@ -59,6 +66,8 @@ ngOnInit(): void {
   if(this.panelMode === 'edit')
   {
     this.product = this.productService.getDetails(this.productID);
+    this.fillFormControlls()
+   
   }
 }
 
@@ -89,34 +98,29 @@ onSubmit() {
     }
   }
 }
-  mapFormControlToInterface(value: any) { 
-    this.product.title = value['title'];
-    this.product.brand = value['brand']
-    this.product.category = value['category'];
-    this.product.description = value['description'];
-    //this.product.discountPercentage = value['discountPercentage'];
-    this.product.price = value['price'];
-    this.product.rating = value['rating'];
-    this.product.stock = value['stock'];
-    this.product.thumbnail = value['thumbnail'];
+mapFormControlToInterface(value: any) { 
+  this.product.title = value['title'];
+  this.product.brand = value['brand']
+  this.product.category = value['category'];
+  this.product.description = value['description'];
+  //this.product.discountPercentage = value['discountPercentage'];
+  this.product.price = value['price'];
+  this.product.rating = value['rating'];
+  this.product.stock = value['stock'];
+  this.product.thumbnail = value['thumbnail'];
 
-    Object.keys(value).forEach(key=>{      
-      if(key.includes('image')){
-        this.product.images.push(value[key])
-      }
-    });
-    
-  }
+  Object.keys(value).forEach(key=>{      
+    if(key.includes('image')){
+      this.product.images.push(value[key])
+    }
+  });
+  
+}
 
 addTextBox(){  
   if(this.productForm.controls['image'+1])
-  {
-    // Object.keys(this.productForm.controls).forEach(key=>{
-    //   if(key.includes('image'))
-    //   { 
-        this.controlCount= this.controlCount + 1;
-    //   }
-    // });    
+  {   
+    this.controlCount= this.controlCount + 1;  
   }
   else
   {
@@ -128,5 +132,4 @@ removeTextBox(){
    this.productForm.removeControl('image'+this.controlCount);
    this.controlCount = this.controlCount - 1;
 }
-
 }
