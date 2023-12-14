@@ -25,7 +25,7 @@ export class AddProductComponent implements OnInit {
     category:'',
     description:'',
     id:null,
-    images:[''],
+    images:[],
     rating:null,
     stock:null,
     thumbnail:'',
@@ -63,11 +63,10 @@ ngOnInit(): void {
 }
 
 onSubmit() {
-  console.log(this.productForm.value);
-  debugger;
   if(this.productForm.valid){
  
-    this.product = this.productForm.value;
+    this.mapFormControlToInterface(this.productForm.value);
+     
     if(this.panelMode === 'submit')
     {
       this.productService.setData(this.product);  
@@ -84,18 +83,32 @@ onSubmit() {
       });  
     }
     else if (this.panelMode ==='edit')
-    {    
+    { 
       this.productService.updateDetails(this.product);  
-      alert("Product "+this.product.title+" Updated successfully");
-      
+      alert("Product "+this.product.title+" Updated successfully");      
     }
   }
 }
+  mapFormControlToInterface(value: any) { 
+    this.product.title = value['title'];
+    this.product.brand = value['brand']
+    this.product.category = value['category'];
+    this.product.description = value['description'];
+    //this.product.discountPercentage = value['discountPercentage'];
+    this.product.price = value['price'];
+    this.product.rating = value['rating'];
+    this.product.stock = value['stock'];
+    this.product.thumbnail = value['thumbnail'];
 
-addTextBox(){
-  debugger;
- 
-  
+    Object.keys(value).forEach(key=>{      
+      if(key.includes('image')){
+        this.product.images.push(value[key])
+      }
+    });
+    
+  }
+
+addTextBox(){  
   if(this.productForm.controls['image'+1])
   {
     // Object.keys(this.productForm.controls).forEach(key=>{
