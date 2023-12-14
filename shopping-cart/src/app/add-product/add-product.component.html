@@ -1,70 +1,117 @@
 
-<form #productForm="ngForm" (ngSubmit)="onSubmit()">
-        
+<form (ngSubmit)="onSubmit()" [formGroup]="productForm">        
     <div class="container">
         <h1>Add New Product</h1>
         <div class="mb-3 row">
             <label for="txttitle" class="col-sm-2 col-form-label">Title:</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="txttitle" name="txttitle" [(ngModel)]="product.title">
+                <input type="text" formControlName="title" class="form-control" id="txttitle" name="txttitle" >
+            </div>
+            <div class="col-sm-3">
+                <div *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched">
+                   <span style="color: red;"> Title is required </span>
+                </div>
             </div>
         </div>
         <div class="mb-3 row">
             <label for="txtprice" class="col-sm-2 col-form-label">Price:</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="txtprice" name="txtprice" [(ngModel)]="product.price">
+                <input type="text" formControlName="price" class="form-control" id="txtprice" name="txtprice" >
+            </div>
+            <div class="col-sm-3">
+                <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+                   <span style="color: red;"> Price is invalid </span>
+                </div>
             </div>
         </div>
         <div class="mb-3 row">
             <label for="txtstock" class="col-sm-2 col-form-label">Stock:</label>
             <div class="col-sm-3">
-            <input type="text" class="form-control" id="txtstock" name="txtstock" [(ngModel)]="product.stock">
+                <input type="text" formControlName="stock" class="form-control" id="txtstock" name="txtstock" >
+            </div>
+            <div class="col-sm-3">
+                <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched">
+                   <span style="color: red;"> Stock is invalid </span>
+                </div>
             </div>
         </div>
         <div class="mb-3 row">
             <label for="txtraiting" class="col-sm-2 col-form-label">Raiting:</label>
             <div class="col-sm-3">
-            <input type="text" class="form-control" id="txtraiting" name="txtraiting" [(ngModel)]="product.rating">
+                <input type="text" formControlName="rating" class="form-control" id="txtraiting" name="txtraiting" >
+            </div>
+            <div class="col-sm-3">
+                <div *ngIf="productForm.get('rating')?.invalid && productForm.get('rating')?.touched">
+                   <span style="color: red;"> Rating is invalid </span>
+                </div>
             </div>
         </div>
         <div class="mb-3 row">
             <label for="txtbrand" class="col-sm-2 col-form-label">Brand:</label>
             <div class="col-sm-3">
-            <input type="text" class="form-control" id="txtbrand" name="txtbrand" [(ngModel)]="product.brand">
+                <input type="text" formControlName="brand" class="form-control" id="txtbrand" name="txtbrand" >
+            </div>
+            <div class="col-sm-3">
+                <div *ngIf="productForm.get('brand')?.invalid && productForm.get('brand')?.touched">
+                   <span style="color: red;"> Brand is required </span>
+                </div>
             </div>
         </div>
         <div class="mb-3 row">
             <label for="txtcategory" class="col-sm-2 col-form-label">Category:</label>
             <div class="col-sm-3">
-            <input type="text" class="form-control" id="txtcategory" name="txtcategory" [(ngModel)]="product.category">
+                <input type="text" formControlName="category" class="form-control" id="txtcategory" name="txtcategory" >
+            </div>
+            <div class="col-sm-3">
+                <div *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched">
+                   <span style="color: red;"> Category is required </span>
+                </div>
             </div>
         </div>
         <div class="mb-3 row">
             <label for="txtDescription" class="col-sm-2 col-form-label">Description:</label>
             <div class="col-sm-3">
-            <input type="text" class="form-control" id="txtDescription" name="txtDescription" [(ngModel)]="product.description">
+                <input type="text" formControlName="description" class="form-control" id="txtDescription" name="txtDescription" >
+            </div>
+            <div class="col-sm-3">
+                <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched">
+                   <span style="color: red;"> Description is required </span>
+                </div>
             </div>
         </div>
         <div class="mb-3 row">
             <label for="txtthumbnail" class="col-sm-2 col-form-label">Thumbnail:</label>
             <div class="col-sm-3">
-            <input type="text" class="form-control" id="txtthumbnail" name="txtthumbnail" [(ngModel)]="product.thumbnail">
+                <input type="text" formControlName="thumbnail" class="form-control" id="txtthumbnail" name="txtthumbnail" >
+            </div>
+            <div class="col-sm-3">
+                <div *ngIf="productForm.get('thumbnail')?.invalid && productForm.get('thumbnail')?.touched">
+                   <span style="color: red;"> Thumbnail is required </span>
+                </div>
             </div>
         </div>   
         <div class="mb-3 row">
-            <div *ngFor="let img of product.images;let i= index;">
-                <label for="txtimage{{i}}" id="lblImage{{i}}" class="col-sm-2 col-form-label">Image {{i+1}}:</label>
-                <div  class="col-sm-3">
-                    <input type="text" class="form-control" id="txtimage{{i}}" name="txtImage{{i}}" [(ngModel)]="product.images[i]" >                   
-                    <input  name="btnImage{{i}}" type="button" id="btnRemoveTextbox" class="btn btn-primary" text="Remove Image" 
-                    value="Remove Image" (click)="removeTextBox(i)">
-                </div>                         
+            <div *ngFor="let img of productForm.controls | keyvalue;">
+                <div *ngIf="img.key.startsWith('image')">                  
+                    <label class="col-sm-2 col-form-label">{{img.key}}</label>
+                    <div  class="col-sm-3">
+                        <input type="text" [formControlName]="img.key" class="form-control" >                   
+                       
+                    </div>  
+                    <div class="col-sm-3">
+                        <div *ngIf="productForm.get(img.key)?.invalid && productForm.get(img.key)?.touched">
+                           <span style="color: red;"> Image is required </span>
+                        </div>
+                    </div>
+                </div>                                
             </div>           
         </div>
         <div class="mb-3 row">
             <div class="col-sm-2"></div>
             <div class="col-sm-3">                
-                <input type="button" name="btnAddTextbox" id="btnAddTextbox" class="btn btn-primary" text="Add" value="Add Image" (click)="addTextBox()">   
+                <input type="button" name="btnAddTextbox" id="btnAddTextbox" class="btn btn-primary" text="Add" value="Add Image" (click)="addTextBox()">  
+                <input  type="button" id="btnRemoveTextbox" class="btn btn-primary" text="Remove Image" 
+                value="Remove Image" (click)="removeTextBox()"> 
             </div>
         </div>
         <div class="mb-3 row">

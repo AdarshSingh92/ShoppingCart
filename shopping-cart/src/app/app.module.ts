@@ -8,7 +8,7 @@ import { HttpService } from './service/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AddProductComponent } from './add-product/add-product.component';
-import { FormsModule } from '@angular/forms'
+import { FormsModule,ReactiveFormsModule, } from '@angular/forms'
 import { ProductService } from './service/product.service';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './service/auth.service';
@@ -23,12 +23,14 @@ import { ProductfilterPipe } from './pipes/productfilter.pipe';
     AddProductComponent,
     LoginComponent,
     ProductfilterPipe
-  ],
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
+    
   ],
   providers: [HttpService, ProductService,AuthService],
   bootstrap: [AppComponent]
