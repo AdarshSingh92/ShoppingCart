@@ -9,9 +9,11 @@ export class HttpService {
   constructor(private http:HttpClient) { }
 
   getData<T>(url:string):Observable<T>{
+    debugger;
    return this.http.get<T>(url);
   }
   postData(url:string,body:any):Observable<any>{
+    debugger;
     const headers = new HttpHeaders({'Content-Type':'application/json'});
     return this.http.post<any>(url, JSON.stringify(body), {headers});
   }

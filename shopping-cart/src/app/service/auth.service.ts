@@ -17,4 +17,8 @@ export class AuthService {
     isLoggedIn():boolean{
       return !! sessionStorage.getItem('logintoken');
     }
+
+    getAuthToken(){
+      sessionStorage.getItem('logintoken');
+    }
 }
