@@ -14,6 +14,10 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './service/auth.service';
 import { ProductfilterPipe } from './pipes/productfilter.pipe';
 import { AuthInterceptor } from './service/authinterceptor';
+import { SharedService } from './service/shared.service';
+import { HeaderComponent } from './header/header.component';
+import { LogoutComponent } from './logout/logout.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -23,7 +27,10 @@ import { AuthInterceptor } from './service/authinterceptor';
     ProductDetailsComponent,
     AddProductComponent,
     LoginComponent,
-    ProductfilterPipe
+    ProductfilterPipe,
+    HeaderComponent,
+    LogoutComponent,
+    DashboardComponent
       ],
   imports: [
     BrowserModule,
@@ -39,7 +46,7 @@ import { AuthInterceptor } from './service/authinterceptor';
       provide:HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi:true
-    },
+    }    
   ],
   bootstrap: [AppComponent]
 })
