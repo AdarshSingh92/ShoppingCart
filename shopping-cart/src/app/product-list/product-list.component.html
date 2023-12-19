@@ -18,8 +18,10 @@
           <div class="card-body">
             <h5 class="card-title">{{product.title}}</h5>
             <p class="card-text">{{product.description}}</p>
-            <a [routerLink]="['/dashboard/product-details',product.id]" class="btn btn-primary">More Details..</a>
-            <a style="margin-left: 30px;" [routerLink]="['/dashboard/addproduct',product.id,'edit']" class="btn btn-primary">Edit Details</a>
+            <div class="row" >
+              <a [routerLink]="['/dashboard/product-details',product.id]" class="btn btn-primary"><i class="fa fa-bars"></i> More Details..</a> &nbsp;
+              <a [routerLink]="['/dashboard/addproduct',product.id,'edit']" class="btn btn-primary"><i class="fa fa-edit"></i> Edit Details</a>
+          </div>
           </div>
         </div>
       </div>      

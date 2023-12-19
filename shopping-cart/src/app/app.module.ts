@@ -19,6 +19,9 @@ import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './logout/logout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { SubmenuComponent } from './submenu/submenu.component';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ProductfilterPipe,
     HeaderComponent,
     LogoutComponent,
-    DashboardComponent
+    DashboardComponent,
+    SubmenuComponent,
+    SideMenuComponent
       ],
   imports: [
     BrowserModule,

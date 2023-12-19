@@ -19,16 +19,13 @@ const routes: Routes = [
   component:DashboardComponent, 
   canActivate:[AuthGuard],
   children:[
+    {path:'',redirectTo:'productlist', pathMatch:'full'},
     {path:'productlist',component:ProductListComponent,canActivate:[AuthGuard]},
     {path:'addproduct',component:AddProductComponent, canActivate:[AuthGuard]},
     {path:'addproduct/:id/:panelmode',component:AddProductComponent, canActivate:[AuthGuard]},
     {path:'product-details/:id',component:ProductDetailsComponent,canActivate:[AuthGuard]}
-  ]},
-  
-  
-  
-  // ,
-  // {path:'**',component:LogoutComponent}
+  ]},   
+  {path:'**',component:LogoutComponent}
 ];
 
 @NgModule({
