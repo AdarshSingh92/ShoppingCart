@@ -1,0 +1,18 @@
+.custom-header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+  }
+
+  /* Custom styles for side menu */
+  .custom-side-menu {
+    background-color: #f8f9fa;
+    height: 100vh;
+  }
+
+  /* Custom styles for footer */
+  .custom-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+  }
