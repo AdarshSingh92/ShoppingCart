@@ -15,10 +15,15 @@ export class AuthService {
       return this.httpService.postData(this.loginURL,{username:userName,password:password});
     }
     isLoggedIn():boolean{
-      return !! sessionStorage.getItem('logintoken');
+      return !! sessionStorage.getItem('loginDetails');
     }
 
-    getAuthToken(){
-      sessionStorage.getItem('logintoken');
+    getAuthToken():string {    
+      return JSON.parse(sessionStorage.getItem('loginDetails')!).Token;
     }
+
+    getUserName():string{
+      return JSON.parse(sessionStorage.getItem('loginDetails')!).UserName;
+    }
+    
 }

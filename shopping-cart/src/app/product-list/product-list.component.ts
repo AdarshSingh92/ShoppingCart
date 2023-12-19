@@ -1,6 +1,7 @@
 import { Component,OnInit  } from '@angular/core';
 import { Product } from '../interface/product';
 import { ProductService } from '../service/product.service';
+import { SharedService } from '../service/shared.service';
 
  
 
@@ -14,8 +15,11 @@ export class ProductListComponent implements OnInit  {
 
   productList:Product[] = [];
   searchTerm:string = '';
-    constructor(public productService:ProductService) { }
-ngOnInit(){
+    constructor(public productService:ProductService,private sharedService:SharedService) { 
+      console.log('product list works!');
+    }
+   
+  ngOnInit(){
   if(localStorage.getItem('productlist') != null){
   this.productList = JSON.parse(localStorage.getItem('productlist')!);
   }
@@ -26,7 +30,10 @@ ngOnInit(){
       localStorage.setItem('productlist',JSON.stringify(this.productList));
       //ProductService.productList = response.products;
     });
-  }
- 
   } 
+}
+
+ 
+
+
 }

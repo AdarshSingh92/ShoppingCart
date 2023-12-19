@@ -29,5 +29,5 @@ export class AuthInterceptor implements HttpInterceptor{
      });
      //pass request to next handler with auth token in request header
      return next.handle(req);
-    }    
+    }
 } 
